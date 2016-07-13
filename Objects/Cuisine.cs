@@ -13,6 +13,21 @@ namespace RestaurantList
       _id = Id;
       _name = Name;
     }
+
+    public override bool Equals(System.Object otherCuisine)
+    {
+      if(!(otherCuisine is Cuisine))
+      {
+        return false;
+      }
+      else
+      {
+        Cuisine newCuisine = (Cuisine) otherCuisine;
+        bool idEquality = (this.GetId() == newCuisine.GetId());
+        bool nameEquality = (this.GetName() == newCuisine.GetName());
+        return (idEquality && nameEquality);
+      }
+    }
     public string GetName()
     {
       return _name;

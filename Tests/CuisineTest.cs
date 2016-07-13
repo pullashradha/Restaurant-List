@@ -18,5 +18,13 @@ namespace RestaurantList
       int numberOfCuisines = Cuisine.GetAll().Count;
       Assert.Equal(0, numberOfCuisines);
     }
+
+    [Fact]
+    public void Cuisine_EqualIfNamesMatch_true()
+    {
+      Cuisine newCuisine1 = new Cuisine("Italian");
+      Cuisine newCuisine2 = new Cuisine("Italian");
+      Assert.Equal(newCuisine1, newCuisine2);
+    }
   }
 }
