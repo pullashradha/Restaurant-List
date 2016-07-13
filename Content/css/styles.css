@@ -1,0 +1,24 @@
+body {
+  color: #000000;
+  font-family: serif;
+}
+
+h1 {
+    font-size: 60pt;
+    text-align: center;
+}
+
+form {
+  margin-left: 35px;
+  margin-right: 35px;
+}
+
+p, .btn-success {
+  font-size: 15pt;
+}
+
+h2 {
+  font-size: 30pt;
+  text-align: center;
+  margin-top: 75px;
+}
