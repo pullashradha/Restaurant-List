@@ -89,21 +89,18 @@ namespace RestaurantList
         conn.Close();
       }
     }
-
     public static Cuisine Find(int QueryId)
     {
       List<Cuisine> resultList = new List<Cuisine> {};
-
       SqlConnection conn = DB.Connection();
       conn.Open();
       SqlDataReader rdr;
-      SqlCommand cmd = new SqlCommand("SELECT * FROM cuisines WHERE id == @QueryId;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT * FROM cuisines WHERE id = @QueryId;", conn);
       SqlParameter IdParameter = new SqlParameter();
       IdParameter.ParameterName = "@QueryId";
       IdParameter.Value = QueryId;
       cmd.Parameters.Add(IdParameter);
       rdr = cmd.ExecuteReader();
-
       while(rdr.Read())
       {
         int returnId = rdr.GetInt32(0);
@@ -122,7 +119,6 @@ namespace RestaurantList
       Cuisine foundCuisine = resultList[0];
       return foundCuisine;
     }
-
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();

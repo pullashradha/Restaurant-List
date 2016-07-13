@@ -43,7 +43,6 @@ namespace RestaurantList
       int nonDbId = newCuisine.GetId();
       Assert.Equal(nonDbId, sqlId);
     }
-
     [Fact]
     public void CuisineTest_Find_ReturnsCorrectCuisine()
     {
