@@ -16,32 +16,41 @@ namespace RestaurantList
       _name = Name;
       _cuisineId = CuisineId;
     }
-
+    public override bool Equals(System.Object otherRestaurant)
+    {
+      if(!(otherRestaurant is Restaurant))
+      {
+        return false;
+      }
+      else
+      {
+        Restaurant newRestaurant = (Restaurant) otherRestaurant;
+        bool idEquality = (this.GetId() == newRestaurant.GetId());
+        bool nameEquality = (this.GetName() == newRestaurant.GetName());
+        bool cuisineIdEquality =  (this.GetCuisineId() == newRestaurant.GetCuisineId());
+        return (nameEquality && cuisineIdEquality && idEquality);
+      }
+    }
     public int GetId()
     {
       return _id;
     }
-
     public string GetName()
     {
       return _name;
     }
-
     public int GetCuisineId()
     {
       return _cuisineId;
     }
-
     public void SetName(string NewName)
     {
       _name = NewName;
     }
-
     public void SetCuisine(int NewCuisine)
     {
       _cuisineId = NewCuisine;
     }
-
     public static List<Restaurant> GetAll()
     {
       List<Restaurant> allRestaurants = new List<Restaurant> {};
@@ -59,16 +68,22 @@ namespace RestaurantList
         Restaurant newRestaurant = new Restaurant(restaurantName, restaurantCuisine, restaurantId);
         allRestaurants.Add(newRestaurant);
       }
-
-      if(rdr != null)
+      if (rdr != null)
       {
         rdr.Close();
       }
-      if(conn != null)
+      if (conn != null)
       {
         conn.Close();
       }
       return allRestaurants;
     }
+    // public static void DeleteAll()
+    // {
+    //   SqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   SqlCommand cmd = new SqlCommand("DELETE FROM restaurants;", conn);
+    //   cmd.ExecuteNonQuery();
+    // }
   }
 }

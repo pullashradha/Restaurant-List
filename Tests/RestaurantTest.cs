@@ -18,7 +18,13 @@ namespace RestaurantList
       int numberOfRestaurants = Restaurant.GetAll().Count;
       Assert.Equal(0, numberOfRestaurants);
     }
-
+    [Fact]
+    public void RestaurantTest_EqualIfNamesMatch_true()
+    {
+      Restaurant newRestaurant1 = new Restaurant("Hotlips Pizza", 1);
+      Restaurant newRestaurant2 = new Restaurant("Hotlips Pizza", 1);
+      Assert.Equal(newRestaurant1, newRestaurant2);
+    }
     public void Dispose()
     {
       // Restaurant.DeleteAll();

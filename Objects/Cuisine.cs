@@ -28,17 +28,17 @@ namespace RestaurantList
         return (idEquality && nameEquality);
       }
     }
+    public int GetId()
+    {
+      return _id;
+    }
     public string GetName()
     {
       return _name;
     }
-    public void SetName(string newName)
+    public void SetName(string NewName)
     {
-      _name = newName;
-    }
-    public int GetId()
-    {
-      return _id;
+      _name = NewName;
     }
     public static List<Cuisine> GetAll()
     {
