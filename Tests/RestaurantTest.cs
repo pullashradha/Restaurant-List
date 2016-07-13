@@ -28,10 +28,19 @@ namespace RestaurantList
     [Fact]
     public void RestaurantTest_Save_SavesRestaurantToDatabase()
     {
-      Restaurant newRestaurant = new Restaurant("Hotlips Pizza",1);
+      Restaurant newRestaurant = new Restaurant("Hotlips Pizza", 1);
       newRestaurant.Save();
       List<Restaurant> resultList = Restaurant.GetAll();
       Assert.Equal(newRestaurant, resultList[0]);
+    }
+    [Fact]
+    public void RestaurantTest_Save_UpdatesRestaurantId()
+    {
+      Restaurant newRestaurant = new Restaurant("Hotlips Pizza", 1);
+      newRestaurant.Save();
+      int sqlId = Restaurant.GetAll()[0].GetId();
+      int nonDbId = newRestaurant.GetId();
+      Assert.Equal(nonDbId, sqlId);
     }
     public void Dispose()
     {
