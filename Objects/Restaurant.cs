@@ -8,12 +8,19 @@ namespace RestaurantList
   {
     private int _id;
     private string _name;
+    private string _address;
+    private string _phoneNumber;
+    private string _description;
     private int _cuisineId;
 
-    public Restaurant(string Name, int CuisineId, int Id = 0)
+
+    public Restaurant(string Name, string Address, string PhoneNumber, string Description, int CuisineId, int Id = 0)
     {
       _id = Id;
       _name = Name;
+      _address = Address;
+      _phoneNumber = PhoneNumber;
+      _description = Description;
       _cuisineId = CuisineId;
     }
     public override bool Equals(System.Object otherRestaurant)
@@ -27,8 +34,11 @@ namespace RestaurantList
         Restaurant newRestaurant = (Restaurant) otherRestaurant;
         bool idEquality = (this.GetId() == newRestaurant.GetId());
         bool nameEquality = (this.GetName() == newRestaurant.GetName());
+        bool addressEquality = (this.GetAddress() == newRestaurant.GetAddress());
+        bool phoneNumberEquality = (this.GetPhoneNumber() == newRestaurant.GetPhoneNumber());
+        bool descriptionEquality = (this.GetDescription() == newRestaurant.GetDescription());
         bool cuisineIdEquality =  (this.GetCuisineId() == newRestaurant.GetCuisineId());
-        return (nameEquality && cuisineIdEquality && idEquality);
+        return (nameEquality && addressEquality && phoneNumberEquality && descriptionEquality && cuisineIdEquality && idEquality);
       }
     }
     public int GetId()
@@ -39,6 +49,18 @@ namespace RestaurantList
     {
       return _name;
     }
+    public string GetAddress()
+    {
+      return _address;
+    }
+    public string GetPhoneNumber()
+    {
+      return _phoneNumber;
+    }
+    public string GetDescription()
+    {
+      return _description;
+    }
     public int GetCuisineId()
     {
       return _cuisineId;
@@ -46,6 +68,18 @@ namespace RestaurantList
     public void SetName(string NewName)
     {
       _name = NewName;
+    }
+    public void SetAddress(string NewAddress)
+    {
+      _address = NewAddress;
+    }
+    public void SetPhoneNumber(string NewPhoneNumber)
+    {
+      _phoneNumber = NewPhoneNumber;
+    }
+    public void SetDescription(string NewDescription)
+    {
+      _description = NewDescription;
     }
     public void SetCuisine(int NewCuisine)
     {
@@ -63,9 +97,12 @@ namespace RestaurantList
       {
         int restaurantId = rdr.GetInt32(0);
         string restaurantName = rdr.GetString(1);
-        int restaurantCuisine = rdr.GetInt32(2);
+        string restaurantAddress = rdr.GetString(2);
+        string restaurantPhoneNumber = rdr.GetString(3);
+        string restaurantDescription = rdr.GetString(4);
+        int restaurantCuisine = rdr.GetInt32(5);
 
-        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantCuisine, restaurantId);
+        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantAddress, restaurantPhoneNumber, restaurantDescription, restaurantCuisine, restaurantId);
         allRestaurants.Add(newRestaurant);
       }
       if (rdr != null)
@@ -83,14 +120,27 @@ namespace RestaurantList
       SqlConnection conn = DB.Connection();
       SqlDataReader rdr;
       conn.Open();
-      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (name, cuisine_id) OUTPUT INSERTED.id VALUES (@RestaurantName, @CuisineId);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (name, address, phone_number, description, cuisine_id) OUTPUT INSERTED.id VALUES (@RestaurantName, @RestaurantAddress, @RestaurantPhoneNumber, @RestaurantDescription, @CuisineId);", conn);
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@RestaurantName";
       nameParameter.Value = this.GetName();
+      SqlParameter addressParameter = new SqlParameter();
+      addressParameter.ParameterName = "@RestaurantAddress";
+      addressParameter.Value = this.GetAddress();
+      SqlParameter phoneNumberParameter = new SqlParameter();
+      phoneNumberParameter.ParameterName = "@RestaurantPhoneNumber";
+      phoneNumberParameter.Value = this.GetPhoneNumber();
+      SqlParameter descriptionParameter = new SqlParameter();
+      descriptionParameter.ParameterName = "@RestaurantDescription";
+      descriptionParameter.Value = this.GetDescription();
       SqlParameter cuisineIdParameter = new SqlParameter();
       cuisineIdParameter.ParameterName = "@CuisineId";
       cuisineIdParameter.Value = this.GetCuisineId();
+
       cmd.Parameters.Add(nameParameter);
+      cmd.Parameters.Add(addressParameter);
+      cmd.Parameters.Add(phoneNumberParameter);
+      cmd.Parameters.Add(descriptionParameter);
       cmd.Parameters.Add(cuisineIdParameter);
       rdr = cmd.ExecuteReader();
       while (rdr.Read())
@@ -120,10 +170,14 @@ namespace RestaurantList
       rdr = cmd.ExecuteReader();
       while (rdr.Read())
       {
-        int returnId = rdr.GetInt32(0);
-        string returnName = rdr.GetString(1);
-        int returnCuisineId = rdr.GetInt32(2);
-        Restaurant newRestaurant = new Restaurant(returnName, returnCuisineId, returnId);
+        int restaurantId = rdr.GetInt32(0);
+        string restaurantName = rdr.GetString(1);
+        string restaurantAddress = rdr.GetString(2);
+        string restaurantPhoneNumber = rdr.GetString(3);
+        string restaurantDescription = rdr.GetString(4);
+        int restaurantCuisine = rdr.GetInt32(5);
+
+        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantAddress, restaurantPhoneNumber, restaurantDescription, restaurantCuisine, restaurantId);
         resultList.Add(newRestaurant);
       }
       if (rdr != null)
