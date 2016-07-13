@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Xunit;
 
-namespace Restuarant
+namespace RestaurantList
 {
   public class RestaurantTest
   {

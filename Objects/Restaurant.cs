@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace RestuarantList
+namespace RestaurantList
 {
-  public class Restuarant
+  public class Restaurant
   {
 
   }

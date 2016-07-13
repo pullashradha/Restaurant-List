@@ -1,7 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace RestuarantList
+namespace RestaurantList
 {
   public class DB
   {
