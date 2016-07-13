@@ -108,7 +108,7 @@ namespace RestaurantList
         Cuisine newCuisine = new Cuisine(returnName, returnId);
         resultList.Add(newCuisine);
       }
-      if(rdr != null)
+      if (rdr != null)
       {
         rdr.Close();
       }
