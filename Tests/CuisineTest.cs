@@ -34,6 +34,25 @@ namespace RestaurantList
       List<Cuisine> resultList = Cuisine.GetAll();
       Assert.Equal(newCuisine, resultList[0]);
     }
+    [Fact]
+    public void CuisineTest_Save_UpdatesCuisineId()
+    {
+      Cuisine newCuisine = new Cuisine("Italian");
+      newCuisine.Save();
+      int sqlId = Cuisine.GetAll()[0].GetId();
+      int nonDbId = newCuisine.GetId();
+      Assert.Equal(nonDbId, sqlId);
+    }
+
+    [Fact]
+    public void CuisineTest_Find_ReturnsCorrectCuisine()
+    {
+      Cuisine newCuisine = new Cuisine("Italian");
+      newCuisine.Save();
+      int newCuisineId = newCuisine.GetId();
+      Cuisine foundCuisine = Cuisine.Find(newCuisineId);
+      Assert.Equal(foundCuisine, newCuisine);
+    }
     public void Dispose()
     {
       Cuisine.DeleteAll();
