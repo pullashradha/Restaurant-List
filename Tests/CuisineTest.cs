@@ -30,7 +30,6 @@ namespace RestaurantList
     {
       Cuisine newCuisine = new Cuisine("Italian");
       newCuisine.Save();
-      List<Cuisine> newCuisineList = new List<Cuisine> {newCuisine};
       List<Cuisine> resultList = Cuisine.GetAll();
       Assert.Equal(newCuisine, resultList[0]);
     }

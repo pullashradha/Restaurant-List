@@ -25,9 +25,17 @@ namespace RestaurantList
       Restaurant newRestaurant2 = new Restaurant("Hotlips Pizza", 1);
       Assert.Equal(newRestaurant1, newRestaurant2);
     }
+    [Fact]
+    public void RestaurantTest_Save_SavesRestaurantToDatabase()
+    {
+      Restaurant newRestaurant = new Restaurant("Hotlips Pizza",1);
+      newRestaurant.Save();
+      List<Restaurant> resultList = Restaurant.GetAll();
+      Assert.Equal(newRestaurant, resultList[0]);
+    }
     public void Dispose()
     {
-      // Restaurant.DeleteAll();
+      Restaurant.DeleteAll();
     }
   }
 }
