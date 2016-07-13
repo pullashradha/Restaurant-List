@@ -13,10 +13,9 @@ namespace RestaurantList
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=restaurant_list_test;Integrated Security=SSPI;";
     }
     [Fact]
-    public void Test_EmptyDatabase_true()
+    public void Test_EmptyDatabase_0()
     {
-      Cuisine newCuisine = new Cuisine ();
-      int numberOfCuisines = newCuisine.GetAll().Count;
+      int numberOfCuisines = Cuisine.GetAll().Count;
       Assert.Equal(0, numberOfCuisines);
     }
   }
