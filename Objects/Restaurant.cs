@@ -93,20 +93,50 @@ namespace RestaurantList
       cmd.Parameters.Add(nameParameter);
       cmd.Parameters.Add(cuisineIdParameter);
       rdr = cmd.ExecuteReader();
-      while(rdr.Read())
+      while (rdr.Read())
       {
         this._id = rdr.GetInt32(0);
       }
-      if(rdr != null)
+      if (rdr != null)
       {
         rdr.Close();
       }
-      if(conn != null)
+      if (conn != null)
       {
         conn.Close();
       }
     }
-
+    public static Restaurant Find(int QueryId)
+    {
+      List<Restaurant> resultList = new List<Restaurant> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants WHERE id = @QueryId;", conn);
+      SqlParameter IdParameter = new SqlParameter();
+      IdParameter.ParameterName = "@QueryId";
+      IdParameter.Value = QueryId;
+      cmd.Parameters.Add(IdParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int returnId = rdr.GetInt32(0);
+        string returnName = rdr.GetString(1);
+        int returnCuisineId = rdr.GetInt32(2);
+        Restaurant newRestaurant = new Restaurant(returnName, returnCuisineId, returnId);
+        resultList.Add(newRestaurant);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      Restaurant foundRestaurant = resultList[0];
+      return foundRestaurant;
+    }
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();

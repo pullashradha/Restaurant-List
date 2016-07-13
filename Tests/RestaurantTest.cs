@@ -26,7 +26,7 @@ namespace RestaurantList
       Assert.Equal(newRestaurant1, newRestaurant2);
     }
     [Fact]
-    public void RestaurantTest_Save_SavesRestaurantToDatabase()
+    public void RestaurantTest_Save_SavesRestaurantsToDatabase()
     {
       Restaurant newRestaurant = new Restaurant("Hotlips Pizza", 1);
       newRestaurant.Save();
@@ -41,6 +41,15 @@ namespace RestaurantList
       int sqlId = Restaurant.GetAll()[0].GetId();
       int nonDbId = newRestaurant.GetId();
       Assert.Equal(nonDbId, sqlId);
+    }
+    [Fact]
+    public void RestaurantTest_Find_ReturnsCorrectRestaurant()
+    {
+      Restaurant newRestaurant = new Restaurant("Hotlips Pizza", 1);
+      newRestaurant.Save();
+      int newRestaurantId = newRestaurant.GetId();
+      Restaurant foundRestaurant = Restaurant.Find(newRestaurantId);
+      Assert.Equal(foundRestaurant, newRestaurant);
     }
     public void Dispose()
     {
