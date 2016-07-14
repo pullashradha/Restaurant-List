@@ -51,6 +51,17 @@ namespace RestaurantList
       Restaurant foundRestaurant = Restaurant.Find(newRestaurantId);
       Assert.Equal(foundRestaurant, newRestaurant);
     }
+    [Fact]
+    public void RestaurantTest_DeleteOne_DeletesOneRestaurant()
+    {
+      Restaurant newRestaurant = new Restaurant("Hotlips Pizza", "Oak Street", "555-555-pizza","they have pizza there", 1);
+      Restaurant newRestaurant2 = new Restaurant("Hotlips Pizza", "Oak Street", "555-555-pizza","they have pizza there", 1);
+      newRestaurant.Save();
+      newRestaurant2.Save();
+      int newRestaurantId = newRestaurant.GetId();
+      Restaurant.DeleteOne(newRestaurantId);
+      Assert.Equal(1, Restaurant.GetAll().Count);
+    }
     public void Dispose()
     {
       Restaurant.DeleteAll();

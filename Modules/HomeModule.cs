@@ -19,7 +19,7 @@ namespace RestaurantList
       };
       Get ["/{id}/{name}/restaurant/list"] = parameters => {
         Cuisine selectedCuisine = Cuisine.Find(parameters.id);
-        return View ["restaurant_list.cshtml", Restaurant.GetAll()];
+        return View ["restaurant_list.cshtml", selectedCuisine.GetRestaurants()];
       };
       Get ["/restaurant/new"] = _ => View ["restaurant_form.cshtml", Cuisine.GetAll()];
       Post ["/restaurant/created"] = _ => {
@@ -33,6 +33,10 @@ namespace RestaurantList
         );
         newRestaurant.Save();
         return View ["restaurant_created.cshtml", newRestaurant];
+      };
+      Post ["/restaurant/deleted"] =_=> {
+        Restaurant.DeleteOne(Request.Form["restaurantId"]);
+        return View["restaurant_deleted.cshtml"];
       };
       Get ["/{id}/{name}/details"] = parameters => {
         Restaurant selectedRestaurant = Restaurant.Find(parameters.id);

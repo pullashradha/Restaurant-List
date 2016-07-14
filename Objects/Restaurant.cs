@@ -198,5 +198,17 @@ namespace RestaurantList
       SqlCommand cmd = new SqlCommand("DELETE FROM restaurants;", conn);
       cmd.ExecuteNonQuery();
     }
+    public static void DeleteOne(int QueryId)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      // SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand("DELETE FROM restaurants WHERE id = @QueryId;", conn);
+      SqlParameter IdParameter = new SqlParameter();
+      IdParameter.ParameterName = "@QueryId";
+      IdParameter.Value = QueryId;
+      cmd.Parameters.Add(IdParameter);
+      cmd.ExecuteNonQuery();
+    }
   }
 }

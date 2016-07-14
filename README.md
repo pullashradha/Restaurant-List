@@ -29,6 +29,8 @@ User can create a cuisine | User inputs cuisine name | app stores Cuisine object
 User can create a restaurant | User inputs restaurant name and cuisine ID | App adds restaurant name to cuisine page
 Display restaurant by cuisine | User inputs restaurant name | app outputs cuisine list for that restaurant
 No repeat names for cuisines and restaurants | User tries to add a new restaurant or cuisine, but the name of that restaurant or cuisine is already associated with an existing cuisine or restaurant | App returns an error page describing the situation
+Delete individual restaurant entry | User clicks button to delete specific restaurant | ---
+Delete entire cuisine category | --- | ---
 
 ## Future Features
 
