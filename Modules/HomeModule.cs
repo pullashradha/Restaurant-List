@@ -17,9 +17,9 @@ namespace RestaurantList
         newCuisine.Save();
         return View ["cuisine_created.cshtml", newCuisine];
       };
-      Get ["/{id}/restaurant/list"] = parameters => {
+      Get ["/{id}/{name}/restaurant/list"] = parameters => {
         Cuisine selectedCuisine = Cuisine.Find(parameters.id);
-        return View["restaurant_list.cshtml", Restaurant.GetAll()];
+        return View ["restaurant_list.cshtml", Restaurant.GetAll()];
       };
       Get ["/restaurant/new"] = _ => View ["restaurant_form.cshtml", Cuisine.GetAll()];
       Post ["/restaurant/created"] = _ => {
