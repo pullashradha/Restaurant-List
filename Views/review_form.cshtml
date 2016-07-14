@@ -1,0 +1,13 @@
+<head>
+  <link rel="stylesheet" href="Content/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="Content/css/styles.css" type="text/css">
+</head>
+<body>
+  <h1 class="page-header">Create a New Review</h1>
+  <form class="form-group" action="/@Model.GetId()/@Model.GetName()/details/review/created" method="post">
+    <p>Your Name: <input type="text" name="user-name" class="form-control"></p>
+    <p>Review: <input type="text" name="review-text" class="form-control"></p>
+    <input type="hidden" name="restaurant-id" value="@Model.GetId()">
+    <button type="submit" class="btn btn-success">Submit Review</button>
+  </form>
+</body>

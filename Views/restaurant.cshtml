@@ -9,9 +9,18 @@
     <li>@Model.GetPhoneNumber()</li>
     <li>@Model.GetAddress()</li>
   </ul>
-  <form class="" action="/restaurant/deleted" method="post">
+  <form class="form-group" action="/restaurant/deleted" method="post">
     <input type="hidden" name="restaurantId" value="@Model.GetId()">
     <button type="submit" class="btn btn-warning">Delete this Restaurant</button>
+    <button type ="submit" class="btn" formaction="/restaurant/reviews/new">Create a New Review</button>
   </form>
   <h2><a href="/">Back Home</a></h2>
+  <h1 class="page-header">Reviews</h1>
+  <ul>
+    @foreach (var review in Model.GetReviews())
+    {
+      <p>@review.GetUserName()</p>
+      <li>@review.GetReviewText()</li>
+    }
+  </ul>
 </body>

@@ -17,7 +17,7 @@ namespace RestaurantList
         newCuisine.Save();
         return View ["cuisine_created.cshtml", newCuisine];
       };
-      Post ["/cuisine/deleted"] =_=> {
+      Post ["/cuisine/deleted"] = _ => {
         Cuisine.DeleteOne(Request.Form["cuisineId"]);
         return View["cuisine_list.cshtml",Cuisine.GetAll()];
       };
@@ -42,13 +42,20 @@ namespace RestaurantList
         Restaurant selectedRestaurant = Restaurant.Find(parameters.id);
         return View ["restaurant.cshtml", selectedRestaurant];
       };
-      Post ["/restaurant/deleted"] =_=> {
+      Post ["/restaurant/deleted"] = _ => {
         Restaurant.DeleteOne(Request.Form["restaurantId"]);
         return View["restaurant_deleted.cshtml"];
       };
-      Post ["/restaurant/list/deleted"] =_=> {
+      Post ["/restaurant/list/deleted"] = _ => {
         Restaurant.DeleteByCuisine(Request.Form["cuisineId"]);
         return View["cuisine_list.cshtml", Cuisine.GetAll()];
+      };
+      Post ["/restaurant/reviews/new"] = _ => View ["review_form.cshtml", Restaurant.Find(Request.Form["restaurantId"])];
+      Post ["/{id}/{name}/details/review/created"] = parameters => {
+        Restaurant selectedRestaurant = Restaurant.Find(parameters.id);
+        Review newReview = new Review (Request.Form["user-name"], Request.Form["review-text"], Request.Form["restaurant-id"]);
+        newReview.Save();
+        return View ["restaurant.cshtml",Restaurant.Find(Request.Form["restaurant-id"])];
       };
     }
   }

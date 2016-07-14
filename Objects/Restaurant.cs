@@ -135,7 +135,6 @@ namespace RestaurantList
       SqlParameter cuisineIdParameter = new SqlParameter();
       cuisineIdParameter.ParameterName = "@CuisineId";
       cuisineIdParameter.Value = this.GetCuisineId();
-
       cmd.Parameters.Add(nameParameter);
       cmd.Parameters.Add(addressParameter);
       cmd.Parameters.Add(phoneNumberParameter);

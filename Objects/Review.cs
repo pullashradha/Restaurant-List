@@ -150,7 +150,6 @@ namespace RestaurantList
       {
         conn.Close();
       }
-      // Review foundReview = ;
       return resultList[0];
     }
     public static void DeleteOne(int QueryId)
