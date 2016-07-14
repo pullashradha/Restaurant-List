@@ -191,23 +191,34 @@ namespace RestaurantList
       Restaurant foundRestaurant = resultList[0];
       return foundRestaurant;
     }
-    public static void DeleteAll()
-    {
-      SqlConnection conn = DB.Connection();
-      conn.Open();
-      SqlCommand cmd = new SqlCommand("DELETE FROM restaurants;", conn);
-      cmd.ExecuteNonQuery();
-    }
     public static void DeleteOne(int QueryId)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      // SqlDataReader rdr;
       SqlCommand cmd = new SqlCommand("DELETE FROM restaurants WHERE id = @QueryId;", conn);
       SqlParameter IdParameter = new SqlParameter();
       IdParameter.ParameterName = "@QueryId";
       IdParameter.Value = QueryId;
       cmd.Parameters.Add(IdParameter);
+      cmd.ExecuteNonQuery();
+    }
+
+    public static void DeleteByCuisine(int QueryId)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM restaurants WHERE cuisine_id = @QueryId;", conn);
+      SqlParameter IdParameter = new SqlParameter();
+      IdParameter.ParameterName = "@QueryId";
+      IdParameter.Value = QueryId;
+      cmd.Parameters.Add(IdParameter);
+      cmd.ExecuteNonQuery();
+    }
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM restaurants;", conn);
       cmd.ExecuteNonQuery();
     }
   }

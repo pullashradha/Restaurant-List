@@ -64,6 +64,17 @@ namespace RestaurantList
       List<Restaurant> resultRestaurantList = newCuisine.GetRestaurants();
       Assert.Equal(testRestaurantList, resultRestaurantList);
     }
+    [Fact]
+    public void CuisineTest_DeleteOne_DeletesOneCuisine()
+    {
+      Cuisine newCuisine1 = new Cuisine("Italian");
+      Cuisine newCuisine2 = new Cuisine("Italian");
+      newCuisine1.Save();
+      newCuisine2.Save();
+      int newCuisineId = newCuisine1.GetId();
+      Cuisine.DeleteOne(newCuisineId);
+      Assert.Equal(1, Cuisine.GetAll().Count);
+    }
     public void Dispose()
     {
       Restaurant.DeleteAll();
