@@ -93,7 +93,7 @@ namespace RestaurantList
       conn.Open();
       SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants;", conn);
       rdr = cmd.ExecuteReader();
-      while(rdr.Read())
+      while (rdr.Read())
       {
         int restaurantId = rdr.GetInt32(0);
         string restaurantName = rdr.GetString(1);
@@ -101,7 +101,6 @@ namespace RestaurantList
         string restaurantPhoneNumber = rdr.GetString(3);
         string restaurantDescription = rdr.GetString(4);
         int restaurantCuisine = rdr.GetInt32(5);
-
         Restaurant newRestaurant = new Restaurant(restaurantName, restaurantAddress, restaurantPhoneNumber, restaurantDescription, restaurantCuisine, restaurantId);
         allRestaurants.Add(newRestaurant);
       }
@@ -202,7 +201,6 @@ namespace RestaurantList
       cmd.Parameters.Add(IdParameter);
       cmd.ExecuteNonQuery();
     }
-
     public static void DeleteByCuisine(int QueryId)
     {
       SqlConnection conn = DB.Connection();
