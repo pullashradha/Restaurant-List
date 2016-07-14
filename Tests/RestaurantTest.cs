@@ -81,7 +81,20 @@ namespace RestaurantList
 
       Restaurant.DeleteByCuisine(delId);
       Assert.Equal(1, Restaurant.GetAll().Count);
+    }
 
+    [Fact]
+    public void RestaurantTest_GetAllReviews_ReturnsListOfReviewsForRestaurant()
+    {
+      Restaurant newRestaurant = new Restaurant("Hotlips Pizza", "Oak Street", "555-555-pizza","they have pizza there", 1);
+      newRestaurant.Save();
+      Review newReview1 = new Review("ExampleName", "I love this restaurant!", newRestaurant.GetId());
+      newReview1.Save();
+      Review newReview2 = new Review("SecondExampleName", "I don't love this restaurant!", newRestaurant.GetId());
+      newReview2.Save();
+      List<Review> testReviewList = new List<Review> {newReview1, newReview2};
+      List<Review> resultReviewList = newRestaurant.GetReviews();
+      Assert.Equal(testReviewList, resultReviewList);
     }
     public void Dispose()
     {

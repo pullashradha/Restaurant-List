@@ -190,6 +190,37 @@ namespace RestaurantList
       Restaurant foundRestaurant = resultList[0];
       return foundRestaurant;
     }
+    public List<Review> GetReviews()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM reviews WHERE restaurant_id = @RestaurantId;", conn);
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(restaurantIdParameter);
+      rdr = cmd.ExecuteReader();
+      List<Review> reviewsList = new List<Review> {};
+      while (rdr.Read())
+      {
+        int reviewId = rdr.GetInt32(0);
+        string reviewName = rdr.GetString(1);
+        string reviewText = rdr.GetString(2);
+        int restaurantId = this._id;
+        Review newReview = new Review(reviewName, reviewText, restaurantId, reviewId);
+        reviewsList.Add(newReview);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return reviewsList;
+    }
     public static void DeleteOne(int QueryId)
     {
       SqlConnection conn = DB.Connection();
