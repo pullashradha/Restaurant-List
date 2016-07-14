@@ -8,11 +8,10 @@
     <ul>
       @foreach(var restaurant in Model)
       {
-        <a href="/@restaurant.GetId()/restaurant/list"><li>@restaurant.GetName()</li></a>
+        <a href="/@restaurant.GetId()/@restaurant.GetName()/details"><li>@restaurant.GetName()</li></a>
       }
     </ul>
     <!-- <a href="/restaurant/list/cleared"><button type="button" class="btn btn-danger">Clear Restaurant List</button></a> -->
-    <br>
     <h2><a href="/cuisine/list">Back to Cuisine List</a></h2>
     <h2><a href="/">Back Home</a></h2>
   </div>

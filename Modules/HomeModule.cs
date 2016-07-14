@@ -34,6 +34,10 @@ namespace RestaurantList
         newRestaurant.Save();
         return View ["restaurant_created.cshtml", newRestaurant];
       };
+      Get ["/{id}/{name}/details"] = parameters => {
+        Restaurant selectedRestaurant = Restaurant.Find(parameters.id);
+        return View ["restaurant.cshtml", selectedRestaurant];
+      };
     }
   }
 }
