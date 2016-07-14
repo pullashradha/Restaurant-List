@@ -119,6 +119,39 @@ namespace RestaurantList
       Cuisine foundCuisine = resultList[0];
       return foundCuisine;
     }
+    public List<Restaurant> GetRestaurants()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM restaurants WHERE cuisine_id = @CuisineId;", conn);
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      cuisineIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(cuisineIdParameter);
+      rdr = cmd.ExecuteReader();
+      List<Restaurant> restaurantsList = new List<Restaurant> {};
+      while (rdr.Read())
+      {
+        int restaurantId = rdr.GetInt32(0);
+        string restaurantName = rdr.GetString(1);
+        string restaurantAddress = rdr.GetString(2);
+        string restaurantPhoneNumber = rdr.GetString(3);
+        string restaurantDescription = rdr.GetString(4);
+        int cuisineId = this._id;
+        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantAddress, restaurantPhoneNumber, restaurantDescription, cuisineId, restaurantId);
+        restaurantsList.Add(newRestaurant);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return restaurantsList;
+    }
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();

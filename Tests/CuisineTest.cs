@@ -51,8 +51,22 @@ namespace RestaurantList
       Cuisine foundCuisine = Cuisine.Find(newCuisineId);
       Assert.Equal(foundCuisine, newCuisine);
     }
+    [Fact]
+    public void CuisineTest_GetRestaurants_RetrievesAllRestaurantsInCuisineCategory()
+    {
+      Cuisine newCuisine = new Cuisine("Italian");
+      newCuisine.Save();
+      Restaurant newRestaurant1 = new Restaurant("Olive Garden", "1010 SW Washington St", "555-555-5555", "It's food", newCuisine.GetId());
+      newRestaurant1.Save();
+      Restaurant newRestaurant2 = new Restaurant("Buffalo Wild Wings", "333 NE Kestrel Ave", "555-555-5555", "Definitely not Italian food", newCuisine.GetId());
+      newRestaurant2.Save();
+      List<Restaurant> testRestaurantList = new List<Restaurant> {newRestaurant1, newRestaurant2};
+      List<Restaurant> resultRestaurantList = newCuisine.GetRestaurants();
+      Assert.Equal(testRestaurantList, resultRestaurantList);
+    }
     public void Dispose()
     {
+      Restaurant.DeleteAll();
       Cuisine.DeleteAll();
     }
   }
