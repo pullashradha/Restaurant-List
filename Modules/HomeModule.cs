@@ -15,7 +15,11 @@ namespace RestaurantList
       Post ["/cuisine/created"] = _ => {
         Cuisine newCuisine = new Cuisine (Request.Form["cuisine-name"]);
         newCuisine.Save();
-        return View ["cuisine_created.cshtml"];
+        return View ["cuisine_created.cshtml", newCuisine];
+      };
+      Get ["/{id}/restaurant/list"] = parameters => {
+        Cuisine selectedCuisine = Cuisine.Find(parameters.id);
+        return View["restaurant_list.cshtml", Restaurant.GetAll()];
       };
       Get ["/restaurant/new"] = _ => View ["restaurant_form.cshtml", Cuisine.GetAll()];
       Post ["/restaurant/created"] = _ => {
@@ -28,7 +32,7 @@ namespace RestaurantList
           Request.Form ["cuisine-id"]
         );
         newRestaurant.Save();
-        return View ["restaurant_created.cshtml"];
+        return View ["restaurant_created.cshtml", newRestaurant];
       };
     }
   }

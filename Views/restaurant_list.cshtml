@@ -1,0 +1,19 @@
+<head>
+  <link rel="stylesheet" href="Content/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="Content/css/styles.css" type="text/css">
+</head>
+<body>
+  <h1 class="page-header">Restaurant List</h1>
+  <div>
+    <ul>
+      @foreach(var restaurant in Model)
+      {
+        <a href="/@restaurant.GetId()/restaurant/list"><li>@restaurant.GetName()</li></a>
+      }
+    </ul>
+    <!-- <a href="/restaurant/list/cleared"><button type="button" class="btn btn-danger">Clear Restaurant List</button></a> -->
+    <br>
+    <h2><a href="/cuisine/list">Back to Cuisine List</a></h2>
+    <h2><a href="/">Back Home</a></h2>
+  </div>
+</body>

@@ -4,11 +4,11 @@
 </head>
 <body>
   <h1 class="page-header">Cuisine List</h1>
-  <div class="container">
+  <div>
     <ul>
       @foreach(var cuisine in Model)
       {
-        <a href="/restaurant/list"><li>@cuisine.GetName()</li></a>
+        <a href="/@cuisine.GetId()/restaurant/list"><li>@cuisine.GetName()</li></a>
       }
     </ul>
     <h2><a href="/restaurant/new">Add Restaurant to Cuisine Category</a></h2>
