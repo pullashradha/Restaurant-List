@@ -1,0 +1,18 @@
+<head>
+  <link rel="stylesheet" href="Content/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="Content/css/styles.css" type="text/css">
+</head>
+<body>
+  <h1 class="page-header">Cuisine List</h1>
+  <div class="container main">
+    <ul>
+      @foreach(var cuisine in Model)
+      {
+        <li>@cuisine.GetName()</li>
+      }
+    </ul>
+    <a href="/clearcuisines"><button type="button" class="btn btn-danger">Clear Cuisine List</button></a>
+    <br>
+    <h2><a href="/">Back Home</a></h2>
+  </div>
+</body>

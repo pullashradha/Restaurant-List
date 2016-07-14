@@ -3,10 +3,7 @@
   <link rel="stylesheet" href="Content/css/styles.css" type="text/css">
 </head>
 <body>
-  @foreach (var cuisine in Model)
-  {
-    <h2>You created the new cuisine category of: @cuisine.GetName()</h2>    
-  }
-  <h2><a href="/cuisine_list">View Cuisine List</a></h2>
+  <h2>You created the new cuisine category of:</h2>
+  <h2><a href="/cuisinelist">View Cuisine List</a></h2>
   <h2><a href="/">Back Home</a></h2>
 </body>
