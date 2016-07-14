@@ -4,14 +4,15 @@
 </head>
 <body>
   <h1 class="page-header">Cuisine List</h1>
-  <div class="container main">
+  <div class="container">
     <ul>
       @foreach(var cuisine in Model)
       {
-        <li>@cuisine.GetName()</li>
+        <a href="/restaurant/list"><li>@cuisine.GetName()</li></a>
       }
     </ul>
-    <a href="/clearcuisines"><button type="button" class="btn btn-danger">Clear Cuisine List</button></a>
+    <h2><a href="/restaurant/new">Add Restaurant to Cuisine Category</a></h2>
+    <a href="/cuisine/list/cleared"><button type="button" class="btn btn-danger">Clear Cuisine List</button></a>
     <br>
     <h2><a href="/">Back Home</a></h2>
   </div>

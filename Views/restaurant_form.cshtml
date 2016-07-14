@@ -1,0 +1,21 @@
+<head>
+  <link rel="stylesheet" href="Content/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="Content/css/styles.css" type="text/css">
+</head>
+<body>
+  <h1 class="page-header">New Restaurant Form</h1>
+  <form class="form-group" action="/restaurant/created" method="post">
+    <p>Name: <input required type="text" name="restaurant-name" class="form-control"></p>
+    <p>Address: <input required type="text" name="restaurant-address" class="form-control"></p>
+    <p>Phone Number: <input required type="text" name="restaurant-phone-number" class="form-control"></p>
+    <p>Description: <input required type="text" name="restaurant-description" class="form-control"></p>
+    <select class="form-control" name="cuisine-id">
+      @foreach (var cuisine in Model)
+      {
+        <option value="@cuisine.GetId()">@cuisine.GetName()</option>
+      }
+    </select>
+    <button type="submit" class="btn btn-success">Create Restaurant</button>
+  </form>
+  <h2><a href="/">Back Home</a></h2>
+</body>
